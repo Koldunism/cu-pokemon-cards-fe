@@ -1,4 +1,3 @@
-// Asegúrate de que este archivo ya maneje los cambios de filtro como se mencionó anteriormente
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
@@ -24,9 +23,9 @@ const CardsContainer: React.FC = () => {
     const fetchCards = async () => {
       try {
         const params: { [key: string]: any } = { limit, offset };
-        
+
         // Add filters to params if they exist
-        if (filters.name) params.name = filters.name;
+        if (filters.name) params.name = `%${filters.name}%`; // Using % for partial match
         if (filters.expansion) params.expansion = filters.expansion;
         if (filters.type) params.type = filters.type;
 

@@ -1,25 +1,52 @@
 .card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    max-width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .card-header {
-    font-size: 1.5em;
-    margin-bottom: 8px;
-  }
-  
-  .card-body {
-    font-size: 1em;
-  }
-  
-  .card-attack {
-    margin-top: 8px;
-    padding: 8px;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-  }
-  
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.card-hp {
+  font-size: 16px;
+  color: #888;
+}
+
+.card-image {
+  text-align: center;
+  margin: 16px 0;
+}
+
+.card-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-info-item {
+  font-size: 14px;
+}
