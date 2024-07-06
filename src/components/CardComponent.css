@@ -1,0 +1,25 @@
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    max-width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-size: 1.5em;
+    margin-bottom: 8px;
+  }
+  
+  .card-body {
+    font-size: 1em;
+  }
+  
+  .card-attack {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+  }
+  
