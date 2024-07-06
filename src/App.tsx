@@ -1,16 +1,14 @@
 import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 import CardsContainer from './containers/CardsContainer';
+import CardDetailContainer from './containers/CardDetailContainer';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Pokémon Cards</h1>
-      </header>
-      <main>
-        <CardsContainer />
-      </main>
-    </div>
+    <Routes>
+      <Route path="/" element={<CardsContainer />} />
+      <Route path="/cards/:id" element={<CardDetailContainer />} />
+    </Routes>
   );
 };
 
