@@ -1,14 +1,23 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import CardsContainer from './containers/CardsContainer';
-import CardDetailContainer from './containers/CardDetailContainer';
+import React, { useState } from "react";
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./pages/Home/Home";
 
-const App: React.FC = () => {
+const App = () => {
+  const [searchParams, setSearchParams] = useState({
+    searchName: "",
+    searchExpansion: "",
+    type: "",
+  });
+
+  const handleSearch = (params: any) => {
+    setSearchParams(params);
+  };
+
   return (
-    <Routes>
-      <Route path="/" element={<CardsContainer />} />
-      <Route path="/cards/:id" element={<CardDetailContainer />} />
-    </Routes>
+    <div className="App">
+      <Navbar onSearch={handleSearch} />
+      <Home searchParams={searchParams} />
+    </div>
   );
 };
 
