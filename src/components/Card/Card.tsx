@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Card.module.css";
 
 interface CardProps {
+  id: string;
   name: string;
   hp: number;
   type: string;
@@ -9,7 +10,14 @@ interface CardProps {
   rarity: string;
 }
 
-const Card: React.FC<CardProps> = ({ name, hp, type, expansion, rarity }) => {
+const Card: React.FC<CardProps> = ({
+  id,
+  name,
+  hp,
+  type,
+  expansion,
+  rarity,
+}) => {
   return (
     <div className={styles.card}>
       <div className={styles.cardHeader}>

@@ -28,7 +28,7 @@ const Home: React.FC<HomeProps> = ({ searchParams }) => {
     axiosInstance
       .get("/cards")
       .then((response) => {
-        setCards(response.data.data);
+        setCards(response.data.data); // Ajustar según la estructura real de la respuesta
         setFilteredCards(response.data.data);
       })
       .catch((error) => console.error("Error fetching cards:", error));
