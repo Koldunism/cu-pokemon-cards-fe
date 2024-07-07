@@ -63,7 +63,7 @@ const CardDetail = () => {
       .catch((error) => console.error("Error simulating battle:", error));
   };
 
-  if (!card) return <div>Loading...</div>;
+  if (!card) return <div></div>;
 
   return (
     <div className={styles.cardDetail}>
@@ -103,7 +103,7 @@ const CardDetail = () => {
                   : "Defender Wins!"}
               </p>
               <p>Attacker Damage: {battleResult.attackerDamage}</p>
-              <p>Defender HP: {battleResult.defenderHP}</p>
+              <p>Defender remaining HP: {battleResult.defenderHP}</p>
             </div>
           )}
         </div>
