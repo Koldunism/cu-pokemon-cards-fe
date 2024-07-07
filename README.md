@@ -22,30 +22,30 @@ Follow these steps to get the project up and running on your local machine.
 
 ### Clone the Repository
 
-\`\`\`bash
+```bash
 git clone https://github.com/Koldunism/cu-pokemon-cards-fe.git
 cd cu-pokemon-cards-fe
-\`\`\`
+```
 
 ### Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### Setup Environment Variables
 
-Create a \`.env\` file in the root directory of the project and add the following environment variable. Replace \`YOUR_BACKEND_URL\` with the URL where the backend is running.
+Create a `.env` file in the root directory of the project and add the following environment variable. Replace `YOUR_BACKEND_URL` with the URL where the backend is running.
 
-\`\`\`env
+```env
 REACT_APP_BACKEND_URL=YOUR_BACKEND_URL
-\`\`\`
+```
 
 ### Running the Application
 
-\`\`\`bash
+```bash
 npm start
-\`\`\`
+```
 
 This will start the application in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
@@ -55,17 +55,17 @@ This project relies on a backend service which is available at [cu-pokemon-cards
 
 ## Project Structure
 
-- \`src/components\`: Contains the reusable components like Navbar and Card.
-- \`src/pages\`: Contains the different pages of the application like Home, Login, and CardDetail.
-- \`src/services\`: Contains the API service for making HTTP requests.
+- `src/components`: Contains the reusable components like Navbar and Card.
+- `src/pages`: Contains the different pages of the application like Home, Login, and CardDetail.
+- `src/services`: Contains the API service for making HTTP requests.
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-- \`npm start\`: Runs the app in development mode.
-- \`npm test\`: Launches the test runner in interactive watch mode.
-- \`npm run build\`: Builds the app for production to the \`build\` folder.
+- `npm start`: Runs the app in development mode.
+- `npm test`: Launches the test runner in interactive watch mode.
+- `npm run build`: Builds the app for production to the `build` folder.
 
 ## License
 
