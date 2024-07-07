@@ -22,8 +22,7 @@ const CardDetail = () => {
     axiosInstance
       .get(`/cards/${id}`)
       .then((response) => {
-        console.log("RESPONSE = ", response);
-        setCard(response.data);
+        setCard(response.data.data);
       })
       .catch((error) => console.error("Error fetching card details:", error));
   }, [id]);
@@ -36,12 +35,13 @@ const CardDetail = () => {
       <div className={styles.cardContainer}>
         <Card
           id={card.id}
-          name={card.name || "Unknown"}
-          hp={card.hp || 0}
-          type={card.type || "Unknown"}
-          expansion={card.expansion || "Unknown"}
-          rarity={card.rarity || "Unknown"}
+          name={card.name}
+          hp={card.hp}
+          type={card.type}
+          expansion={card.expansion}
+          rarity={card.rarity}
         />
+        <div className={styles.vsCircle}>VS</div>
         <div className={styles.battleSection}>
           <h2>Battle with:</h2>
           <select className={styles.battleSelect}>
