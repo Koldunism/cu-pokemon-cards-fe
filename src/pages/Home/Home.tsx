@@ -4,12 +4,12 @@ import CardList from "../../components/CardList/CardList";
 import styles from "./Home.module.css";
 
 interface Card {
-  id: string;
+  id: string; // Asegurarnos de que el tipo sea string como en el backend
   name: string;
-  hp: number;
   type: string;
-  expansion: string;
+  hp: number;
   rarity: string;
+  expansion: string;
 }
 
 interface HomeProps {
@@ -21,42 +21,53 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ searchParams }) => {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [filteredCards, setFilteredCards] = useState<Card[]>([]);
+  const [allCards, setAllCards] = useState<Card[]>([]);
+  const [limit, setLimit] = useState(4);
+  const [offset, setOffset] = useState(0);
+  const [hasNext, setHasNext] = useState(true);
+
+  const fetchCards = async (limit: number, offset: number) => {
+    try {
+      const response = await axiosInstance.get("/cards", {
+        params: {
+          limit,
+          offset,
+        },
+      });
+
+      setAllCards((prevCards) => [...prevCards, ...response.data.data]);
+      setOffset(offset + limit);
+      setHasNext(response.data.hasNext);
+    } catch (error) {
+      console.error("Error fetching cards:", error);
+    }
+  };
 
   useEffect(() => {
-    axiosInstance
-      .get("/cards")
-      .then((response) => {
-        setCards(response.data.data);
-        setFilteredCards(response.data.data);
-      })
-      .catch((error) => console.error("Error fetching cards:", error));
+    setAllCards([]); // Clear the current cards
+    setOffset(0); // Reset the offset
+    fetchCards(limit, 0); // Fetch the first page of cards
   }, []);
 
-  useEffect(() => {
-    const filtered = cards.filter(
-      (card) =>
-        (searchParams.searchName
-          ? card.name
-              .toLowerCase()
-              .includes(searchParams.searchName.toLowerCase())
-          : true) &&
-        (searchParams.searchExpansion
-          ? card.expansion
-              .toLowerCase()
-              .includes(searchParams.searchExpansion.toLowerCase())
-          : true) &&
-        (searchParams.type
-          ? card.type.toLowerCase() === searchParams.type.toLowerCase()
-          : true)
+  const filteredCards = allCards.filter((card) => {
+    return (
+      card.name.toLowerCase().includes(searchParams.searchName.toLowerCase()) &&
+      card.expansion
+        .toLowerCase()
+        .includes(searchParams.searchExpansion.toLowerCase()) &&
+      (searchParams.type
+        ? card.type.toLowerCase() === searchParams.type.toLowerCase()
+        : true)
     );
-    setFilteredCards(filtered);
-  }, [searchParams, cards]);
+  });
 
   return (
     <div className={styles.home}>
-      <CardList cards={filteredCards} />
+      <CardList
+        cards={filteredCards}
+        onLoadMore={() => fetchCards(limit, offset)}
+        hasNext={hasNext}
+      />
     </div>
   );
 };
