@@ -14,9 +14,18 @@ interface Card {
   description?: string;
 }
 
+interface BattleResult {
+  attackerWins: boolean;
+  attackerDamage: number;
+  defenderHP: number;
+}
+
 const CardDetail = () => {
   const { id } = useParams<{ id: string }>();
   const [card, setCard] = useState<Card | null>(null);
+  const [opponentId, setOpponentId] = useState<string>("");
+  const [battleResult, setBattleResult] = useState<BattleResult | null>(null);
+  const [availablePokemon, setAvailablePokemon] = useState<Card[]>([]);
 
   useEffect(() => {
     axiosInstance
@@ -26,6 +35,33 @@ const CardDetail = () => {
       })
       .catch((error) => console.error("Error fetching card details:", error));
   }, [id]);
+
+  useEffect(() => {
+    axiosInstance
+      .get("/cards")
+      .then((response) => {
+        setAvailablePokemon(response.data.data);
+      })
+      .catch((error) =>
+        console.error("Error fetching available Pokémon:", error)
+      );
+  }, []);
+
+  const handleBattle = () => {
+    console.log(`ATTACKER : ${id}, DEFENDER: ${opponentId}`);
+    axiosInstance
+      .get(`/cards/battle`, {
+        params: {
+          attackerId: id,
+          defenderId: opponentId,
+        },
+      })
+      .then((response) => {
+        console.log("response: ", response);
+        setBattleResult(response.data);
+      })
+      .catch((error) => console.error("Error simulating battle:", error));
+  };
 
   if (!card) return <div>Loading...</div>;
 
@@ -44,11 +80,32 @@ const CardDetail = () => {
         <div className={styles.vsCircle}>VS</div>
         <div className={styles.battleSection}>
           <h2>Battle with:</h2>
-          <select className={styles.battleSelect}>
-            <option value="pokemon1">Pokemon 1</option>
-            <option value="pokemon2">Pokemon 2</option>
+          <select
+            className={styles.battleSelect}
+            value={opponentId}
+            onChange={(e) => setOpponentId(e.target.value)}
+          >
+            <option value="">Select a Pokémon</option>
+            {availablePokemon.map((pokemon) => (
+              <option key={pokemon.id} value={pokemon.id}>
+                {pokemon.name}
+              </option>
+            ))}
           </select>
-          <button className={styles.battleButton}>BATTLE!</button>
+          <button className={styles.battleButton} onClick={handleBattle}>
+            BATTLE!
+          </button>
+          {battleResult && (
+            <div className={styles.battleResult}>
+              <p>
+                {battleResult.attackerWins
+                  ? "Attacker Wins!"
+                  : "Defender Wins!"}
+              </p>
+              <p>Attacker Damage: {battleResult.attackerDamage}</p>
+              <p>Defender HP: {battleResult.defenderHP}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
