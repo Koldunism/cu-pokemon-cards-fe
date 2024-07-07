@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.card {
+  border: 1px solid #ccc;
+  padding: 8px;
+  margin: 16px;
+  border-radius: 8px;
+  width: 180px;
+  height: 260px; /* Ajustar la altura de la carta */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: 'Roboto', sans-serif; /* Añadir la nueva tipografía */
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+
+.cardName {
+  text-align: left;
+}
+
+.cardHP {
+  text-align: right;
+}
+
+.cardImage {
+  display: flex;
+  justify-content: center;
+  margin: 8px 0;
+  flex-grow: 1;
+}
+
+.cardImage img {
+  width: auto; /* Asegurar que la imagen mantiene su proporción */
+  height: auto; 
+  max-height: 100px; /* Limitar la altura de la imagen */
+}
+
+.cardDetails {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9em; /* Ajustar el tamaño de la fuente */
+}

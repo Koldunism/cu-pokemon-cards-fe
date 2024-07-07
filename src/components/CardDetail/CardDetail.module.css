@@ -1,0 +1,7 @@
+.card-detail {
+  /* Estilos para el detalle de la carta */
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 8px;
+  border-radius: 8px;
+}
