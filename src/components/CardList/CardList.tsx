@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CardList.module.css";
 
 interface Card {
-  id: string; // Asegurarnos de que el tipo sea string como en el backend
+  id: string;
   name: string;
   type: string;
   hp: number;
